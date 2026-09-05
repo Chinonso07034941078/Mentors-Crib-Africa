@@ -1,106 +1,49 @@
-/* Editorial Transfer: cobalt authority, cyan connection, generous editorial rhythm, and human-centered motion. */
-import React, { useEffect, useMemo, useRef, useState } from "react";
+/* Editorial Transfer: institutional clarity, deep cobalt, electric cyan, and smooth human-scale motion. */
+import React, { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation } from "wouter";
-import { ArrowDownRight, ArrowUpRight, ChevronRight, Menu, MoveUpRight, Search, X } from "lucide-react";
+import { ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
+import Home from "./pages/Home";
+import { AboutPage, StoryPage, FounderPage, GrowthJourneyPage, ProgramsPage, MentorshiftPage, AcademyPage, CoursesPage, ResourcesPage, BlogPage, CommunityPage, EventsPage, VolunteerPage, PartnerPage, SupportPage, GalleryPage, TestimonialsPage, FAQsPage, ContactPage, PrivacyPage, TermsPage, NotFoundPage } from "./components/SitePages";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
-const ASSETS = {
-  hero: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1600&q=88",
-  mentor: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=88",
-  community: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=88",
-  resource: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1400&q=88",
-  mark: "",
-};
-
-const NAV = [["About", "/about"], ["Mentors", "/mentors"], ["Programs", "/programs"], ["Resources", "/resources"], ["Community", "/community"]];
-const mentors = [
-  { name: "Aisha Mensah", role: "Product & leadership", city: "Accra", image: ASSETS.mentor, color: "blue" },
-  { name: "Kofi Owusu", role: "Finance & growth", city: "Nairobi", image: ASSETS.community, color: "cyan" },
-  { name: "Zanele Mokoena", role: "Creative strategy", city: "Johannesburg", image: ASSETS.hero, color: "peach" },
-  { name: "Daniel Okafor", role: "Technology & systems", city: "Lagos", image: ASSETS.resource, color: "sand" },
-  { name: "Nia Kamau", role: "People & culture", city: "Kigali", image: ASSETS.community, color: "lilac" },
-  { name: "Tolu Adebayo", role: "Brand & community", city: "Dakar", image: ASSETS.mentor, color: "mint" },
+export const NAV_LINKS = [
+  ["Home", "/"], ["About", "/about"], ["Programs", "/programs"], ["Resources", "/resources"], ["Community", "/community"],
 ];
-
-function Logo({ inverse = false, compact = false }) {
-  return <Link href="/" className={`brand ${inverse ? "brand--inverse" : ""} ${compact ? "brand--compact" : ""}`}>
-    <span className="brand__mark"><span>MC</span><img src={ASSETS.mark} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} /></span>
-    {!compact && <span className="brand__type"><b>Mentors</b><b>Crib <em>AFRICA</em></b></span>}
-  </Link>;
-}
-
-function Reveal({ children, className = "", delay = 0 }) {
-  const ref = useRef(null);
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return undefined;
-    const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) { node.classList.add("is-visible"); observer.unobserve(node); } }, { threshold: 0.12 });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-  return <div ref={ref} className={`reveal ${className}`} style={{ "--delay": `${delay}ms` }}>{children}</div>;
-}
-
-function Eyebrow({ children, light = false }) { return <span className={`eyebrow ${light ? "eyebrow--light" : ""}`}>{children}</span>; }
-function Line({ inverse = false }) { return <div className={`transfer-line ${inverse ? "transfer-line--inverse" : ""}`}><span /><i /></div>; }
-function Action({ href, children, inverse = false }) { return <Link href={href} className={`action ${inverse ? "action--inverse" : ""}`}><span>{children}</span><ArrowUpRight size={16} /></Link>; }
 
 function Layout({ children }) {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => { const handler = () => setScrolled(window.scrollY > 28); window.addEventListener("scroll", handler); return () => window.removeEventListener("scroll", handler); }, []);
-  useEffect(() => { setOpen(false); window.scrollTo({ top: 0, behavior: "instant" }); }, [location]);
-  return <div className="site-shell">
-    <header className={`site-nav ${scrolled ? "site-nav--scrolled" : ""}`}>
-      <Logo />
-      <nav className="desktop-nav">{NAV.map(([label, href]) => <Link key={href} href={href} className={location === href ? "active" : ""}>{label}</Link>)}</nav>
-      <div className="nav-actions"><Link className="nav-secondary" href="/become-a-mentor">Become a mentor</Link><Action href="/find-a-mentor">Find a mentor</Action><button className="menu-button" onClick={() => setOpen((value) => !value)} aria-label="Toggle menu">{open ? <X size={20} /> : <Menu size={20} />}</button></div>
-    </header>
-    {open && <div className="mobile-nav">{NAV.map(([label, href]) => <Link key={href} href={href}>{label}<ChevronRight size={18} /></Link>)}<Link href="/become-a-mentor">Become a mentor<ChevronRight size={18} /></Link><Link className="mobile-nav__cta" href="/find-a-mentor">Find a mentor<ArrowUpRight size={18} /></Link></div>}
-    {children}
-    <Footer />
-  </div>;
+  useEffect(() => { setOpen(false); window.scrollTo(0, 0); }, [location]);
+  return <div className="site-shell"><Navbar open={open} setOpen={setOpen} links={NAV_LINKS} /><main>{children}</main><Footer /></div>;
 }
 
-function Footer() {
-  return <footer className="footer"><div className="footer__top"><div><Logo inverse /><p className="footer__lede">Experience is meant<br />to be transferred.</p><div className="footer__stamp">MC <span>EST. 2024</span></div></div><div className="footer__cta"><Eyebrow light>MAKE YOUR NEXT MOVE</Eyebrow><h2>Bring what you know.<br /><span>Make room for what’s next.</span></h2><Action href="/contact" inverse>Start a conversation</Action></div></div><div className="footer__bottom"><span>© {new Date().getFullYear()} Mentors Crib Africa</span><div><a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a></div><span>Accra · Lagos · Everywhere</span></div></footer>;
+function Router() {
+  return <Switch>
+    <Route path="/" component={Home} />
+    <Route path="/about" component={AboutPage} />
+    <Route path="/our-story" component={StoryPage} />
+    <Route path="/founder" component={FounderPage} />
+    <Route path="/growth-journey" component={GrowthJourneyPage} />
+    <Route path="/programs" component={ProgramsPage} />
+    <Route path="/mentorshift" component={MentorshiftPage} />
+    <Route path="/learning-academy" component={AcademyPage} />
+    <Route path="/courses" component={CoursesPage} />
+    <Route path="/resources" component={ResourcesPage} />
+    <Route path="/blog" component={BlogPage} />
+    <Route path="/community" component={CommunityPage} />
+    <Route path="/events" component={EventsPage} />
+    <Route path="/volunteer" component={VolunteerPage} />
+    <Route path="/partner-with-us" component={PartnerPage} />
+    <Route path="/support-the-movement" component={SupportPage} />
+    <Route path="/gallery" component={GalleryPage} />
+    <Route path="/testimonials" component={TestimonialsPage} />
+    <Route path="/faqs" component={FAQsPage} />
+    <Route path="/contact" component={ContactPage} />
+    <Route path="/privacy-policy" component={PrivacyPage} />
+    <Route path="/terms-conditions" component={TermsPage} />
+    <Route component={NotFoundPage} />
+  </Switch>;
 }
 
-function PageIntro({ number, label, title, lead, dark = false, note = "AN EDITION OF THE TRANSFER SERIES" }) {
-  return <section className={`page-intro ${dark ? "page-intro--dark" : ""}`}><div className="page-intro__index">{number}</div><div className="page-intro__copy"><div className="publisher"><Logo compact inverse={dark} /><span>{note}</span></div><Eyebrow light={dark}>{label}</Eyebrow><h1>{title}</h1><p>{lead}</p></div><div className="page-intro__arrow">↗</div><Line inverse={dark} /></section>;
-}
-
-function Home() {
-  return <main><section className="hero"><Reveal className="hero__copy"><Eyebrow>MENTORSHIP <span>•</span> COMMUNITY <span>•</span> GROWTH</Eyebrow><h1>The right<br />conversation<br />can change your <span>direction.</span></h1><p className="hero__lede">A mentorship ecosystem for ambitious people building meaningful careers, companies, and communities across Africa.</p><div className="hero__actions"><Action href="/find-a-mentor">Find a mentor</Action><Link className="text-link" href="/mentors">Explore mentors <MoveUpRight size={15} /></Link></div><div className="hero__micro"><span>01 / 04</span><span>THE TRANSFER SERIES</span></div></Reveal><Reveal className="hero__visual" delay={160}><div className="hero__frame"><img src={ASSETS.hero} alt="African founder in a cobalt-blue jacket" /><div className="hero__caption"><span>PORTRAIT / 01</span><span>EXPERIENCE IN MOTION</span></div></div><div className="hero__stamp"><b>MC</b><small>EXPERIENCE<br />IN MOTION</small></div><div className="hero__note">For the road ahead <MoveUpRight size={15} /></div></Reveal><div className="hero__line"><Line /></div></section>
-    <Reveal><section className="signal-band"><span>THIS IS A PLACE FOR</span><b>Curiosity.</b><b>Clarity.</b><b>Forward motion.</b><span>SCROLL TO TRANSFER <ArrowDownRight size={17} /></span></section></Reveal>
-    <section className="statement section-pad"><Reveal className="section-index">01</Reveal><Reveal className="statement__copy" delay={100}><Eyebrow>THE IDEA</Eyebrow><h2>Experience is not meant to be <span>kept.</span></h2><p>It moves from one person to another — through perspective, challenge, encouragement, and the kind of conversation that makes a new path feel possible.</p><Action href="/about">Our point of view</Action></Reveal><Reveal className="statement__aside" delay={180}><div className="glass-card"><span>THE TRANSFER PRINCIPLE</span><strong>01</strong><p>Good mentorship does not hand you a map. It helps you read the terrain.</p></div></Reveal></section>
-    <Reveal><section className="blue-band"><div className="blue-band__copy"><Eyebrow light>FIND YOUR NEXT CONVERSATION</Eyebrow><h2>Go further<br /><span>with context.</span></h2><p>Find the people who have already walked a version of the road you are on — and are willing to walk with you for a while.</p><Action href="/find-a-mentor" inverse>Find a mentor</Action></div><div className="blue-band__orb"><div /><div /><span>↗</span><small>CONTEXT<br />CHANGES<br />EVERYTHING</small></div></section></Reveal>
-    <section className="chapter-grid section-pad"><Reveal className="chapter-grid__intro"><Eyebrow>THE ECOSYSTEM</Eyebrow><h2>Different roads.<br /><span>Shared direction.</span></h2><p>Start where you are. Choose the doorway that feels most useful right now.</p></Reveal><div className="chapter-list">{[["01", "Meet the mentors", "People who have walked ahead and kept the door open.", "/mentors"], ["02", "Find your program", "Structured space for a meaningful next move.", "/programs"], ["03", "Enter the community", "A wider circle for questions, ideas, and momentum.", "/community"]].map(([num, title, desc, href], index) => <Reveal key={num} delay={index * 80}><Link href={href}><span>{num}</span><div><b>{title}</b><p>{desc}</p></div><ArrowUpRight size={18} /></Link></Reveal>)}</div></section>
-    <Reveal><section className="image-story"><img src={ASSETS.community} alt="Mentorship community in conversation" /><div className="image-story__overlay"><Eyebrow light>THE PEOPLE IN BETWEEN</Eyebrow><h2>There is power<br />in the <span>in-between.</span></h2><p>The best conversations do not just answer the question. They change the question.</p><Action href="/community" inverse>See the community</Action></div></section></Reveal>
-    <Reveal><section className="quote-band"><p>“A meaningful conversation can be the first piece of evidence that your next chapter is already beginning.”</p><span>— MENTORS CRIB AFRICA / FIELD NOTE 001</span></section></Reveal>
-  </main>;
-}
-
-function About() { return <main><PageIntro number="01" label="THE IDEA" title={<>A better future is built in <span>conversation.</span></>} lead="Mentors Crib Africa is a community for people who believe that experience becomes more valuable when it moves." /><section className="manifesto section-pad"><Reveal className="manifesto__rail"><span>OUR MANIFESTO</span><div>↓</div></Reveal><div className="manifesto__body"><Reveal><p className="manifesto__lead">We create the conditions for honest exchange between where someone is and where they want to go.</p></Reveal>{["Perspective before prescription.", "Connection before credentials.", "Progress that leaves a trail for others."].map((item, index) => <Reveal className="manifesto-row" delay={index * 90} key={item}><span>0{index + 1}</span><h3>{item}</h3><p>Mentorship works when it is specific, generous, and grounded in the reality of the person in front of you.</p></Reveal>)}</div></section><section className="about-split section-pad"><Reveal><Eyebrow>WHAT WE BELIEVE</Eyebrow><h2>People are the<br /><span>infrastructure.</span></h2></Reveal><Reveal className="about-split__copy" delay={120}><p>Talent is everywhere. Access is not. We are building a bridge between lived experience and the people who need a little more context to make their next move.</p><div className="stat-row"><div><b>06</b><span>cities in the first circle</span></div><div><b>∞</b><span>ways to make an impact</span></div><div><b>01</b><span>shared direction</span></div></div></Reveal></section><section className="blue-band blue-band--split"><div><Eyebrow light>OUR VISION</Eyebrow><h2>More doors<br /><span>open earlier.</span></h2></div><p>We are building the connective tissue between talent and opportunity — one meaningful exchange at a time.</p></section></main>; }
-
-function Mentors() { const [query, setQuery] = useState(""); const filtered = useMemo(() => mentors.filter((mentor) => `${mentor.name} ${mentor.role} ${mentor.city}`.toLowerCase().includes(query.toLowerCase())), [query]); return <main><PageIntro number="02" label="MENTORSHIP" title={<>Find the people who have <span>walked ahead.</span></>} lead="Filter by the kind of context you need next. Every profile is a doorway to a more informed move." /><section className="directory section-pad"><div className="directory-toolbar"><div className="search-field"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search by name, expertise or city" /></div><span className="filter-label">{filtered.length} MENTORS <ChevronRight size={15} /></span></div><div className="mentor-grid">{filtered.map((mentor, index) => <Reveal key={mentor.name} delay={(index % 3) * 80}><Link href="/mentor-profile" className={`mentor-card mentor-card--${mentor.color}`}><div className="mentor-card__image"><img src={mentor.image} alt={`${mentor.name}, mentor`} /><span>0{index + 1}</span><i>VIEW PROFILE ↗</i></div><div className="mentor-card__meta"><div><h3>{mentor.name}</h3><p>{mentor.role} · {mentor.city}</p></div><ArrowUpRight size={18} /></div></Link></Reveal>)}</div>{filtered.length === 0 && <div className="empty-state">No mentor matched that search yet. Try a city, role, or a broader question.</div>}</section></main>; }
-
-function MentorProfile() { return <main><section className="profile-hero"><Reveal className="profile-hero__image"><img src={ASSETS.mentor} alt="Aisha Mensah" /><span>MENTOR PROFILE / 01</span></Reveal><Reveal className="profile-hero__copy" delay={140}><Eyebrow>PRODUCT LEADER · ACCRA, GHANA</Eyebrow><h1>Aisha<br /><span>Mensah</span></h1><p className="profile-role">Helping ambitious builders turn big questions into clear next moves.</p><Line /><p>“I am most useful when the path feels crowded. We make space, name the real question, and move from there.”</p><Action href="/contact">Request a conversation</Action></Reveal></section><section className="profile-body section-pad"><Reveal><Eyebrow>AREAS OF CONTEXT</Eyebrow><h2>Build with<br /><span>intention.</span></h2></Reveal><Reveal className="profile-details" delay={120}><p>Aisha works with founders and product teams navigating their first inflection points: finding focus, building the right team, and creating products people return to.</p><div className="tag-row"><span>Product strategy</span><span>Leadership</span><span>Founder transitions</span></div><div className="availability"><span>AVAILABLE FOR</span><b>One-off conversations<br />and short mentoring arcs.</b></div></Reveal></section></main>; }
-
-function Programs() { return <main><PageIntro number="03" label="PROGRAMS" title={<>Structured space for <span>forward motion.</span></>} lead="Programs that turn the right conversation into a rhythm — with clarity, accountability, and room to think." /><section className="program-list section-pad">{[["01", "The Direction Lab", "A six-week cohort for people at a meaningful crossroads.", "Six weeks · 12 people", "/program-details"], ["02", "Mentor Circles", "Small, focused groups built around shared questions.", "Monthly · 8 people", "/program-details"], ["03", "Open Office Hours", "A generous first conversation when you need one.", "45 minutes · 1:1", "/contact"]].map(([num, title, desc, meta, href], index) => <Reveal key={num} delay={index * 80}><Link href={href} className="program-row"><span>{num}</span><div><h2>{title}</h2><p>{desc}</p><small>{meta}</small></div><ArrowUpRight size={22} /></Link></Reveal>)}</section><Reveal><section className="program-note section-pad"><div className="glass-card glass-card--large"><Eyebrow>WHY RHYTHM MATTERS</Eyebrow><h2>One conversation<br /><span>starts the shift.</span></h2><p>Practice is what turns insight into direction. Our programs hold a little space open long enough for the next move to become visible.</p><Action href="/contact">Ask about a program</Action></div></section></Reveal></main>; }
-
-function ProgramDetails() { return <main><PageIntro number="03 / 01" label="THE DIRECTION LAB" title={<>A clearer next step is a <span>practice.</span></>} lead="Six weeks of honest questions, useful frameworks, and a small group of people willing to keep showing up." dark /><section className="details-grid section-pad"><Reveal><Eyebrow>THE FORMAT</Eyebrow><h2>Less advice.<br /><span>More direction.</span></h2><p className="details-lede">A small, generous room for people at an inflection point — changing roles, starting something, or asking what the next version should look like.</p><Action href="/contact">Join the next lab</Action></Reveal><Reveal className="detail-steps" delay={120}>{[["01", "Name the terrain", "What is actually changing? What is staying?"], ["02", "Find the signal", "Separate the useful tension from the background noise."], ["03", "Make the move", "Leave with a small action you can take this week."], ["04", "Keep the door open", "Build a relationship that continues past the cohort."]].map(([num, title, copy]) => <div key={num}><span>{num}</span><b>{title}</b><p>{copy}</p></div>)}</Reveal></section><section className="blue-band blue-band--split"><div><Eyebrow light>THE OUTPUT</Eyebrow><h2>A more useful<br /><span>question.</span></h2></div><p>You do not leave with a perfect five-year plan. You leave with more agency around the next five minutes, five days, and five months.</p></section></main>; }
-
-function Resources() { return <main><PageIntro number="04" label="RESOURCES" title={<>Useful ideas for the <span>road ahead.</span></>} lead="Field notes, practical prompts, and honest reflections for people making meaningful moves." /><section className="resource-feature section-pad"><Reveal><img src={ASSETS.resource} alt="Notebook and desk for reflective work" /></Reveal><Reveal className="resource-feature__copy" delay={120}><Eyebrow>FIELD NOTE / 001</Eyebrow><h2>The work before<br /><span>the work.</span></h2><p>Before the next role, the next pitch, or the next big decision, there is a quieter question: what do you need to understand first?</p><Action href="/resource-details">Read the field note</Action></Reveal></section><section className="resource-list section-pad"><Reveal className="resource-list__heading"><Eyebrow>THE INDEX</Eyebrow><h2>Read, keep,<br /><span>return.</span></h2></Reveal><div>{[["02", "A better question is a better starting point", "Perspective", "/resource-details"], ["03", "How to ask for the room you need", "Courage", "/resource-details"], ["04", "Notes on being early, not behind", "Timing", "/resource-details"], ["05", "The people who make a place possible", "Community", "/resource-details"]].map(([num, title, tag, href], index) => <Reveal delay={index * 70} key={num}><Link href={href}><span>{num}</span><b>{title}</b><small>{tag}</small><ArrowUpRight size={18} /></Link></Reveal>)}</div></section></main>; }
-
-function ResourceDetails() { return <main><PageIntro number="04 / 01" label="FIELD NOTE / 001" title={<>The work before <span>the work.</span></>} lead="A short note on attention, preparation, and the invisible work that makes a visible move possible." /><article className="article section-pad"><Reveal className="article__meta"><span>8 MIN READ</span><span>BY MENTORS CRIB AFRICA</span><span>09.04.24</span></Reveal><Reveal className="article__body" delay={100}><p className="article__lead">There is always a part of the work no one sees. The question before the question. The conversation before the pitch. The season of getting close enough to the problem that your first answer stops being the one you want to give.</p><p>We call it preparation, but that word can feel too neat. Sometimes it is uncertainty. Sometimes it is letting a useful idea stay unfinished long enough for another person to make it sharper.</p><blockquote>“The next move becomes clearer when you stop trying to make it impressive.”</blockquote><p>That is why mentorship matters. Not because someone else can hand you certainty, but because the right person can help you stay with the question until it becomes useful.</p><Action href="/resources">Back to resources</Action></Reveal></article></main>; }
-
-function Community() { return <main><PageIntro number="05" label="COMMUNITY" title={<>A wider circle changes the <span>conversation.</span></>} lead="A place for people who are building, learning, questioning, and making room for other people to do the same." /><Reveal><section className="community-feature"><img src={ASSETS.community} alt="Community gathering" /><div className="community-feature__card glass-card"><Eyebrow>THE OPEN ROOM</Eyebrow><h2>Show up with<br /><span>a question.</span></h2><p>Our community gatherings are intentionally unfinished. Bring what you are working through; leave with a wider view.</p><Action href="/contact">Join the next room</Action></div></section></Reveal><section className="community-grid section-pad"><Reveal><Eyebrow>THE RHYTHM</Eyebrow><h2>Not a network.<br /><span>A practice.</span></h2></Reveal><div className="community-grid__items">{[["01", "Open rooms", "Low-pressure gatherings for high-quality questions."], ["02", "Shared notes", "Practical wisdom collected from across the circle."], ["03", "Warm introductions", "Connection with care, context, and a reason to begin."]].map(([num, title, copy], index) => <Reveal className="community-card" delay={index * 90} key={num}><span>{num}</span><h3>{title}</h3><p>{copy}</p></Reveal>)}</div></section></main>; }
-
-function Contact({ mentor = false }) { const [sent, setSent] = useState(false); return <main><PageIntro number={mentor ? "06" : "07"} label={mentor ? "BECOME A MENTOR" : "CONTACT"} title={mentor ? <>Your experience can become someone else’s <span>evidence.</span></> : <>Make the next conversation <span>count.</span></>} lead={mentor ? "If you have context, care, and a willingness to share the road, there is room for you here." : "Tell us what you are navigating. We will help you find the right doorway into the Crib."} dark={mentor} /><section className="contact-grid section-pad"><Reveal><Eyebrow>{mentor ? "THE INVITATION" : "START HERE"}</Eyebrow><h2>{mentor ? <>Leave a<br /><span>trail.</span></> : <>Let's make<br /><span>room.</span></>}</h2><p>{mentor ? "Mentorship is not about having every answer. It is about being willing to offer a little context, ask a better question, and stay present for the next step." : "A short note is enough. Tell us your city, your question, and what kind of conversation would be useful right now."}</p><div className="contact-details"><span>hello@mentorscrib.africa</span><span>Accra · Lagos · Everywhere</span></div></Reveal><Reveal className="contact-form-wrap" delay={120}>{sent ? <div className="success-card glass-card"><span>MESSAGE RECEIVED</span><h3>We will be in touch<br /><em>soon.</em></h3><p>Thank you for making the first move.</p></div> : <form className="contact-form" onSubmit={(event) => { event.preventDefault(); setSent(true); }}><label>Name<input required placeholder="Your name" /></label><label>Email<input required type="email" placeholder="you@example.com" /></label><label>What are you navigating?<textarea required rows="4" placeholder="A little context goes a long way..." /></label><button className="action" type="submit"><span>Send the note</span><ArrowUpRight size={16} /></button></form>}</Reveal></section></main>; }
-
-function FindMentor() { return <main><PageIntro number="02 / 00" label="FIND A MENTOR" title={<>Start with the question you are <span>carrying.</span></>} lead="A few details help us route you toward the right kind of context." /><section className="finder section-pad"><Reveal className="finder__intro"><Eyebrow>THE FIRST MOVE</Eyebrow><h2>What would feel<br /><span>useful now?</span></h2><p>There is no wrong answer. The best match begins with honest context.</p></Reveal><Reveal className="finder__choices" delay={120}>{["A clearer direction", "A different perspective", "A practical next step", "Someone who has been there"].map((choice) => <button key={choice} onClick={() => window.alert("Thanks — we’ll use that context to guide the next conversation.")}><span>{choice}</span><ArrowUpRight size={18} /></button>)}</Reveal></section></main>; }
-
-function NotFound() { return <main><PageIntro number="404" label="NOT FOUND" title={<>This page took a <span>different route.</span></>} lead="The doorway you are looking for may have moved. The conversation does not have to." /><div className="section-pad"><Action href="/">Return home</Action></div></main>; }
-function Router() { return <Switch><Route path="/" component={Home} /><Route path="/about" component={About} /><Route path="/mentors" component={Mentors} /><Route path="/mentor-profile" component={MentorProfile} /><Route path="/programs" component={Programs} /><Route path="/program-details" component={ProgramDetails} /><Route path="/resources" component={Resources} /><Route path="/resource-details" component={ResourceDetails} /><Route path="/community" component={Community} /><Route path="/contact" component={Contact} /><Route path="/become-a-mentor" component={() => <Contact mentor />} /><Route path="/find-a-mentor" component={FindMentor} /><Route component={NotFound} /></Switch>; }
 export default function App() { return <Layout><Router /></Layout>; }
