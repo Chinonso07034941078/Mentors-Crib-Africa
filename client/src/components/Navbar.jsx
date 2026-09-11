@@ -4,13 +4,13 @@ import { Link, useLocation } from "wouter";
 import { ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
 
 export const MCA_LOGOS = {
-  header: "https://res.cloudinary.com/dnvgl9k4i/image/upload/v1788559505/WhatsApp_Image_2026-09-04_at_10.51.11_PM_2_cp1ywy.jpg",
-  footer: "https://res.cloudinary.com/dnvgl9k4i/image/upload/v1788559504/WhatsApp_Image_2026-09-04_at_10.51.11_PM_4_nu75ha.jpg",
+  header: "/assets/mentors-logo.jpg",
+  footer: "/assets/mentors-logo-blue.jpg",
 };
 
 export function Logo({ inverse = false, compact = false, variant }) {
   const src = MCA_LOGOS[variant || (inverse ? "footer" : "header")];
-  return <Link href="/" className={`brand ${inverse ? "brand--inverse" : ""}`} aria-label="Mentors Crib Africa home"><span className="brand__asset"><img src={src} alt="Mentors Crib Africa logo" /></span>{!compact && <span className="brand__type"><b>Mentors</b><b>Crib <em>AFRICA</em></b></span>}</Link>;
+  return <Link href="/" className={`brand ${inverse ? "brand--inverse" : ""}`} aria-label="Mentors Crib Africa home"><span className="brand__asset"><img src={src} alt="Mentors Crib Africa logo" /></span></Link>;
 }
 
 export default function Navbar({ open, setOpen, links }) {
