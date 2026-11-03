@@ -1,11 +1,12 @@
 /* Editorial Transfer: the publisher mark should arrive first; navigation stays light, clear, and tactile. */
 import React, { useEffect, useState } from "react";
+import { brandAssets } from "../lib/brandAssets";
 import { Link, useLocation } from "wouter";
 import { ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
 
 export const MCA_LOGOS = {
-  header: "/assets/mentors-logo.jpg",
-  footer: "/assets/mentors-logo-blue.jpg",
+  header: brandAssets.logo,
+  footer: brandAssets.logoWhite,
 };
 
 export function Logo({ inverse = false, compact = false, variant }) {
