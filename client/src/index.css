@@ -48,3 +48,61 @@
 .brand-edition{background:#efeff8}.brand-edition h2{color:var(--cobalt);font:800 clamp(2.6rem,5vw,5rem)/.95 Manrope;letter-spacing:-.07em}.brand-edition>div>p{max-width:520px;color:var(--muted)}
 .brand-edition__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:42px}.brand-edition figure{margin:0}.brand-edition figure img{width:100%;aspect-ratio:1;object-fit:contain;background:#fff}.brand-edition figcaption{padding:16px 0;font:700 11px Manrope;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt)}
 @media(max-width:760px){.brand__asset{width:142px;height:50px}.brand--inverse .brand__asset{width:190px;height:64px}.hero__stamp--logo{width:126px;height:96px;left:-10px;padding:12px}.hero__stamp--logo img{width:100px;height:42px}.hero__stamp--logo small{font-size:6px}.brand-edition__grid{grid-template-columns:1fr}.blue-band__logo{inset:30% 10%;width:80%;height:110px}}
+
+/* ===== Nov 2026 client revision: numbers removed, founder brief, programs, socials, WhatsApp ===== */
+.page-intro{grid-template-columns:minmax(0,820px)}
+.statement{grid-template-columns:1fr 30%}
+.manifesto-row{grid-template-columns:1fr 1.4fr}
+.program-row{grid-template-columns:1fr auto}
+.program-row__sub{margin:0 0 12px!important;color:var(--cyan)!important}
+.journey-card{grid-template-columns:1fr 10%}
+.resource-list a{grid-template-columns:1fr 100px 20px}
+.faq-item button{grid-template-columns:1fr auto}
+.faq-item p{margin-left:0}
+.footer__lede{line-height:1.25}
+
+.founder-brief{display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:7vw;align-items:center;background:#fff}
+.founder-brief__photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;border-radius:4px;box-shadow:0 30px 60px -30px rgba(13,8,158,.45)}
+.founder-brief__copy h2{margin:18px 0 22px;color:var(--cobalt);font:800 clamp(2.8rem,5vw,5.2rem)/.9 Manrope;letter-spacing:-.09em}
+.founder-brief__copy p{max-width:560px;margin:0 0 18px;color:var(--muted);font-size:17px}
+.founder-brief__copy .action{margin-top:12px}
+
+.program-detail .content-split__copy p{max-width:540px}
+.program-detail__actions{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:10px}
+.program-points{background:var(--paper,#f6f6fb)}
+.program-points__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-top:30px}
+.program-points__grid--wide{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.program-points h3{margin:0;color:var(--cobalt);font:700 21px/1.1 Manrope;letter-spacing:-.05em}
+.program-points p{margin:12px 0 0;color:var(--muted);font-size:14px}
+
+.social-icons{display:flex;flex-wrap:wrap;gap:12px}
+.social-icon{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;transition:transform .25s var(--ease),background .25s ease,color .25s ease,border-color .25s ease}
+.social-icon:hover{transform:translateY(-4px)}
+.social-icons--dark .social-icon{border:1px solid rgba(255,255,255,.3);color:#fff}
+.social-icons--dark .social-icon:hover{background:var(--cyan);border-color:var(--cyan);color:var(--cobalt)}
+.social-icons--light .social-icon{border:1px solid var(--line);color:var(--cobalt)}
+.social-icons--light .social-icon:hover{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
+.contact-social .social-icons{grid-column:1/-1}
+.social-strip>.social-icons{justify-content:flex-end}
+
+.contact-details{display:flex;flex-direction:column;gap:8px}
+.contact-form__hint{display:block;margin-top:14px;color:var(--muted);font-size:12px}
+.success-card a{color:var(--cobalt);font-weight:700;text-decoration:underline}
+
+.whatsapp-float{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:center;gap:10px;padding:12px 18px 12px 13px;border-radius:999px;background:#25d366;color:#fff;font:800 13px Manrope;letter-spacing:.01em;box-shadow:0 12px 30px -8px rgba(0,0,0,.35);transition:transform .25s var(--ease),box-shadow .25s ease}
+.whatsapp-float:hover{transform:translateY(-3px);box-shadow:0 18px 36px -10px rgba(0,0,0,.4)}
+
+@media (max-width:900px){
+  .journey-card{grid-template-columns:1fr 8%}
+  .founder-brief{grid-template-columns:1fr;gap:45px}
+  .founder-brief__photo{max-width:420px}
+  .social-strip>.social-icons{justify-content:flex-start}
+}
+@media (max-width:560px){
+  .journey-card{grid-template-columns:1fr 25px}
+  .resource-list a{grid-template-columns:1fr 18px}
+  .faq-item button{grid-template-columns:1fr auto}
+  .faq-item p{margin-left:0}
+  .whatsapp-float{right:14px;bottom:14px;padding:13px}
+  .whatsapp-float span{display:none}
+}

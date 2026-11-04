@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation } from "wouter";
 import { ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
 import Home from "./pages/Home";
-import { AboutPage, StoryPage, FounderPage, GrowthJourneyPage, ProgramsPage, MentorshiftPage, AcademyPage, CoursesPage, ResourcesPage, BlogPage, CommunityPage, EventsPage, VolunteerPage, PartnerPage, SupportPage, GalleryPage, TestimonialsPage, FAQsPage, ContactPage, PrivacyPage, TermsPage, NotFoundPage } from "./components/SitePages";
+import { AboutPage, StoryPage, FounderPage, GrowthJourneyPage, ProgramsPage, ProgramDetailPage, AcademyPage, CoursesPage, ResourcesPage, BlogPage, CommunityPage, EventsPage, VolunteerPage, PartnerPage, SupportPage, GalleryPage, TestimonialsPage, FAQsPage, ContactPage, PrivacyPage, TermsPage, NotFoundPage } from "./components/SitePages";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { WhatsAppButton } from "./components/SocialIcons";
 
 export const NAV_LINKS = [
   ["Home", "/"], ["About", "/about"], ["Programs", "/programs"], ["Resources", "/resources"], ["Community", "/community"],
@@ -15,7 +16,7 @@ function Layout({ children }) {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
   useEffect(() => { setOpen(false); window.scrollTo(0, 0); }, [location]);
-  return <div className="site-shell"><Navbar open={open} setOpen={setOpen} links={NAV_LINKS} /><main>{children}</main><Footer /></div>;
+  return <div className="site-shell"><Navbar open={open} setOpen={setOpen} links={NAV_LINKS} /><main>{children}</main><Footer /><WhatsAppButton /></div>;
 }
 
 function Router() {
@@ -26,7 +27,8 @@ function Router() {
     <Route path="/founder" component={FounderPage} />
     <Route path="/growth-journey" component={GrowthJourneyPage} />
     <Route path="/programs" component={ProgramsPage} />
-    <Route path="/mentorshift" component={MentorshiftPage} />
+    <Route path="/programs/:slug" component={ProgramDetailPage} />
+    <Route path="/mentorshift">{() => <ProgramDetailPage params={{ slug: "mentorshift" }} />}</Route>
     <Route path="/learning-academy" component={AcademyPage} />
     <Route path="/courses" component={CoursesPage} />
     <Route path="/resources" component={ResourcesPage} />
