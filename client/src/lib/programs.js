@@ -1,4 +1,5 @@
 // Program copy supplied by MCA in "MCA Programs" (Nov 2026). Keep wording in sync with that document.
+import { cloudPhoto } from "./brandAssets";
 export const PROGRAMS = [
   {
     slug: "mentorshift",
@@ -13,7 +14,7 @@ export const PROGRAMS = [
       ["MentorShift Campus Events", "Takes mentorship conversations to tertiary institutions, equipping students and young people with insights on personal development, career growth, leadership, purpose and life beyond the classroom."],
       ["MentorShift Conference", "Brings mentors, mentees, professionals and growth-minded individuals together for meaningful conversations, practical learning and deeper engagement around the principles and practice of mentorship."],
     ],
-    image: "/assets/ai-mentorship.jpg",
+    image: cloudPhoto("/assets/ai-mentorship.jpg", 1600),
   },
   {
     slug: "accountability-forge",
@@ -27,7 +28,7 @@ export const PROGRAMS = [
     ],
     listTitle: "The structure",
     list: [["Set goals", ""], ["Develop action plans", ""], ["Track progress", ""], ["Stay accountable", ""]],
-    image: "/assets/ai-learning.jpg",
+    image: cloudPhoto("/assets/ai-learning.jpg", 1600),
   },
   {
     slug: "mens-forge",
@@ -40,7 +41,7 @@ export const PROGRAMS = [
     ],
     listTitle: "Focus areas",
     list: [["Character development", ""], ["Spirituality", ""], ["Leadership", ""], ["Relationships", ""], ["Financial responsibility", ""], ["Accountability", ""]],
-    image: "/assets/hub-community.jpg",
+    image: cloudPhoto("/assets/hub-community.jpg", 1600),
   },
   {
     slug: "cribtalks",
@@ -54,7 +55,7 @@ export const PROGRAMS = [
     ],
     listTitle: "Topics we explore",
     list: [["Personal development", ""], ["Leadership", ""], ["Relationships", ""], ["Career & business", ""], ["Spirituality", ""], ["Productivity", ""]],
-    image: "/assets/ai-community.jpg",
+    image: cloudPhoto("/assets/ai-community.jpg", 1600),
   },
   {
     slug: "book-club",
@@ -68,7 +69,7 @@ export const PROGRAMS = [
     ],
     listTitle: "How it works",
     list: [["Selected reading materials", ""], ["Structured reading challenges", ""], ["Group discussions", ""]],
-    image: "/assets/mentors-landscape.jpg",
+    image: cloudPhoto("/assets/mentors-landscape.jpg", 1600),
   },
   {
     slug: "productivity-reset",
@@ -82,7 +83,7 @@ export const PROGRAMS = [
     ],
     listTitle: "What you will do",
     list: [["Evaluate your productivity patterns", ""], ["Establish better habits", ""], ["Create practical plans", ""], ["Build systems for execution", ""]],
-    image: "/assets/ai-impact.jpg",
+    image: cloudPhoto("/assets/ai-impact.jpg", 1600),
   },
 ];
 

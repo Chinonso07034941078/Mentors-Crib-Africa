@@ -135,3 +135,9 @@
 .contact-form select{display:block;width:100%;margin-top:10px;padding:13px 0;border:0;border-bottom:1px solid var(--line);outline:0;background:transparent;color:var(--ink);font:400 16px Inter,Arial,sans-serif;text-transform:none;letter-spacing:0}
 .contact-form select:focus{border-color:var(--cyan)}
 @media(max-width:600px){.hub-dialog{padding:12px}.hub-dialog__panel{padding:28px 22px;max-height:calc(100dvh - 24px)}.hub-dialog__panel h2{font-size:2.2rem}.founder-bio p{font-size:16px}}
+
+/* Readability: action buttons inside glass cards keep their own button text style (the generic .glass-card span label rule was turning their text cobalt-on-cobalt). */
+.glass-card .action span{color:inherit;font:inherit;letter-spacing:inherit}
+/* Performance: keep the fixed grain overlay and the rotating rings on their own GPU layers so scrolling doesn't repaint the whole page. */
+body:before{will-change:transform;transform:translateZ(0)}
+.blue-band__orb div{will-change:transform}
