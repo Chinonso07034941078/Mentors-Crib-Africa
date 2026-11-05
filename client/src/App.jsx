@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation } from "wouter";
 import { ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
 import Home from "./pages/Home";
-import { AboutPage, StoryPage, FounderPage, GrowthJourneyPage, ProgramsPage, ProgramDetailPage, AcademyPage, CoursesPage, ResourcesPage, BlogPage, CommunityPage, EventsPage, VolunteerPage, PartnerPage, SupportPage, GalleryPage, TestimonialsPage, FAQsPage, ContactPage, PrivacyPage, TermsPage, NotFoundPage } from "./components/SitePages";
+import { AboutPage, StoryPage, FounderPage, GrowthJourneyPage, ProgramsPage, ProgramDetailPage, AcademyPage, CoursesPage, ResourcesPage, BlogPage, CommunityPage, EventsPage, VolunteerPage, PartnerPage, SupportPage, GalleryPage, TestimonialsPage, FAQsPage, ContactPage, JoinHubPage, PrivacyPage, TermsPage, NotFoundPage } from "./components/SitePages";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { WhatsAppButton } from "./components/SocialIcons";
@@ -42,6 +42,7 @@ function Router() {
     <Route path="/testimonials" component={TestimonialsPage} />
     <Route path="/faqs" component={FAQsPage} />
     <Route path="/contact" component={ContactPage} />
+    <Route path="/contact/join-a-hub" component={JoinHubPage} />
     <Route path="/privacy-policy" component={PrivacyPage} />
     <Route path="/terms-conditions" component={TermsPage} />
     <Route component={NotFoundPage} />
