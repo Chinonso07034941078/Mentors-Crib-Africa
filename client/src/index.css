@@ -141,3 +141,5 @@
 /* Performance: keep the fixed grain overlay and the rotating rings on their own GPU layers so scrolling doesn't repaint the whole page. */
 body:before{will-change:transform;transform:translateZ(0)}
 .blue-band__orb div{will-change:transform}
+/* Founder name leads; "The Magical PM" sits under it as a signature. */
+.content-split__copy .founder-signature{margin:-12px 0 22px;color:var(--cobalt);font:italic 600 1.15rem/1.3 Manrope;letter-spacing:.01em}
