@@ -15,7 +15,7 @@ export const NAV_LINKS = [
 function Layout({ children }) {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
-  useEffect(() => { setOpen(false); window.scrollTo(0, 0); }, [location]);
+  useEffect(() => { setOpen(false); window.scrollTo({ top: 0, left: 0, behavior: "instant" }); }, [location]);
   return <div className="site-shell"><Navbar open={open} setOpen={setOpen} links={NAV_LINKS} /><main>{children}</main><Footer /><WhatsAppButton /></div>;
 }
 

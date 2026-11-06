@@ -143,3 +143,16 @@ body:before{will-change:transform;transform:translateZ(0)}
 .blue-band__orb div{will-change:transform}
 /* Founder name leads; "The Magical PM" sits under it as a signature. */
 .content-split__copy .founder-signature{margin:-12px 0 22px;color:var(--cobalt);font:italic 600 1.15rem/1.3 Manrope;letter-spacing:.01em}
+
+/* Touch screens: a tap shouldn't leave icons stuck in their hover state (lifted and filled) when you come back to the page. */
+@media (hover:none){
+.social-icon:hover,.whatsapp-float:hover,.founder-whatsapp:hover,.contact-social a:hover,.social-strip__links a:hover{transform:none;box-shadow:none}
+.social-icons--light .social-icon:hover,.contact-social a:hover{background:transparent;border-color:var(--line);color:var(--cobalt)}
+.social-icons--dark .social-icon:hover,.social-strip__links a:hover{background:transparent;border-color:rgba(255,255,255,.3);color:#fff}
+.founder-whatsapp:hover{background:#25d366}
+.action:hover{transform:none;box-shadow:none;background:var(--cobalt)}
+.action--inverse:hover{background:white}
+}
+/* Instant press feedback on every device. */
+.social-icon:active,.whatsapp-float:active,.founder-whatsapp:active{transform:scale(.92)}
+.social-icon:focus-visible,.whatsapp-float:focus-visible,.founder-whatsapp:focus-visible,.action:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
